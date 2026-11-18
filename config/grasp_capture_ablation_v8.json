@@ -1,0 +1,11 @@
+{
+  "extends":"config/grasp_capture_protocol_v8.json",
+  "version":"visual_capture_v8_component_ablation",
+  "scope":"Post-initial-result development component ablation on the SAME three selected states. Motivated by the recorded static sensitivity diagnostic; not independent confirmation or a new performance cohort. No thresholds, candidate grid, ranking or physics changes.",
+  "modes":{
+    "obb_point_capture":{"representation":"obb","capture":true,"fixture_position_bound_m":0.0,"fixture_yaw_bound_deg":0.0,"capsule_perturbations":false},
+    "obb_point_pose_sensitive_capture":{"representation":"obb","capture":true,"fixture_position_bound_m":0.0,"fixture_yaw_bound_deg":0.0,"capsule_perturbations":true},
+    "convex_point_pose_sensitive_capture":{"representation":"convex","capture":true,"fixture_position_bound_m":0.0,"fixture_yaw_bound_deg":0.0,"capsule_perturbations":true},
+    "convex_bounded_clearance":{"representation":"convex","capture":false,"fixture_position_bound_m":0.002,"fixture_yaw_bound_deg":3.0,"capsule_perturbations":false}
+  }
+}

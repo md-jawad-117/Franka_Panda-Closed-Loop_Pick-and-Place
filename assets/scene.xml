@@ -1,0 +1,60 @@
+<!-- Workspace scene. Fixed camera poses come from config (sim.cameras, look-at). The Menagerie Panda is attached at runtime with MjSpec (see sim.py)
+     onto the site "robot_mount" on top of the pedestal. Capsule and slot sizes here are
+     overwritten from config/default.yaml at load time. -->
+<mujoco model="closed_loop_pick_place">
+  <option timestep="0.002" integrator="implicitfast" gravity="0 0 -9.81" cone="elliptic"
+          impratio="10"/>
+
+  <visual>
+    <headlight diffuse="0.5 0.5 0.5" ambient="0.25 0.25 0.25" specular="0 0 0"/>
+    <quality shadowsize="4096"/>
+    <global offwidth="1280" offheight="720" azimuth="150" elevation="-25"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.35 0.45 0.6" rgb2="0.05 0.05 0.1"
+             width="512" height="512"/>
+    <texture name="checker" type="2d" builtin="checker" rgb1="0.25 0.27 0.3"
+             rgb2="0.18 0.2 0.22" width="512" height="512" mark="edge" markrgb="0.4 0.4 0.4"/>
+    <material name="floor" texture="checker" texrepeat="8 8" reflectance="0.1"/>
+    <material name="table" rgba="0.6 0.55 0.5 1"/>
+    <material name="pedestal" rgba="0.3 0.3 0.33 1"/>
+    <material name="slot" rgba="0.15 0.75 0.25 1"/>
+    <material name="capsule" rgba="0.9 0.2 0.2 1"/>
+  </asset>
+
+  <worldbody>
+    <light name="sun" directional="true" pos="0 0 3" dir="0.2 0.1 -1" diffuse="0.7 0.7 0.7"
+           castshadow="true"/>
+    <light name="fill" pos="1.5 -1.0 1.8" dir="-1 0.6 -1" diffuse="0.3 0.3 0.3"
+           castshadow="false"/>
+
+    <geom name="floor" type="plane" size="3 3 0.1" material="floor"/>
+
+    <body name="pedestal" pos="0 0 0.2">
+      <geom name="pedestal" type="box" size="0.12 0.12 0.2" material="pedestal"/>
+      <site name="robot_mount" pos="0 0 0.2" size="0.001"/>
+    </body>
+
+    <body name="table" pos="0.5 0 0.2">
+      <geom name="table" type="box" size="0.35 0.45 0.2" material="table" friction="1 0.01 0.001"/>
+    </body>
+
+    <body name="capsule" pos="0.45 -0.1 0.408">
+      <freejoint name="capsule_free"/>
+      <geom name="capsule" type="capsule" size="0.008 0.015" mass="0.005"
+            friction="1.2 0.01 0.001" material="capsule" condim="4" priority="1"/>
+      <site name="capsule_site" size="0.002" rgba="1 1 0 0"/>
+    </body>
+
+    <!-- Slot: mocap body, origin at the table surface under the cavity center.
+         Long axis of the cavity is the body x axis. Geoms are rebuilt from config. -->
+    <body name="slot" mocap="true" pos="0.48 0.15 0.4">
+      <geom name="slot_bottom" type="box" size="0.033 0.0205 0.0015" pos="0 0 0.0015" material="slot"/>
+      <site name="slot_site" pos="0 0 0.003" size="0.002" rgba="0 1 0 0"/>
+    </body>
+
+    <camera name="front_cam" pos="1 -0.5 0.75"/>
+    <camera name="top_cam" pos="0.47 0 1.25"/>
+  </worldbody>
+</mujoco>

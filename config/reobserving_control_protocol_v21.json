@@ -1,0 +1,12 @@
+{
+  "version":"safe_waypoint_reobserved_centering_v21",
+  "parent_control_protocol":"config/centering_control_protocol_v20.json",
+  "runtime_additions":{"observation_timeout_s":2.0,"observation_samples":2,"observation_span_s":0.2,"revalidation_position_m":0.004,"maximum_safe_replans":1},
+  "methods":["centering_v20","reobserving_v21"],
+  "development":{"seeds":[600,603,605],"conditions":["nominal","release_phase"]},
+  "fresh_smoke":{"seeds":[800,801],"conditions":["nominal","late","phase","release_phase"]},
+  "correction":"v20 aborts immediately after reorientation because capsule age exceeds0.5s, preventing safe movement to the view where it can be seen again. Permit only the existing clearance-height lateral approach under missing observations, then wait for two distinct synchronized stable learned pairs at that waypoint before lowering. Revalidate the original plan or permit one bounded safe-height replan. Stale targets never become fresh observations.",
+  "controls":"Same optics, geometry worker, neural checkpoints, contact-push targets, low-height freshness/stop guards, strict placement evaluator, physics and30s budget. No new actual-state inputs or fictitious measurements.",
+  "freeze":"Freeze revision before v21 full episodes; preserve every v20 failure. Known development first. Fresh scenes remain unused during implementation tuning.",
+  "scope":"Correctness/active-observation development revision, not established novelty, a general motion safety guarantee or final benchmark. Contact motion still requires genuinely fresh validated observations."
+}

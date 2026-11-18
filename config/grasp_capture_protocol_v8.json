@@ -1,0 +1,23 @@
+{
+  "version":"visual_convex_cad_capture_v8",
+  "scope":"Selected development checkpoints, not a new held-out controller cohort. Collision and static capture diagnostics only; no real-time or completed-placement claim.",
+  "parent_protocol":"config/grasp_planner_protocol_v7.json",
+  "cases":["nominal__v4__505","phase__v4__500","release_phase__v4__503"],
+  "candidate_count":1351,
+  "candidates":"Frozen v7 family plus the recorded VISUAL target/quaternion at the checkpoint, ranked by the same offset/rotation/opening cost. Never use true target pose or outcome for ranking.",
+  "minimum_clearance_m":0.0005,
+  "clearance_scope":"A shared 0.5 mm geometric sensitivity threshold for all four matched modes, not a certified tracking/noise safety margin. Keep the old v7 result unchanged; do not attribute differences solely to mesh representation.",
+  "modes":{
+    "obb_point_clearance":{"representation":"obb","capture":false,"fixture_position_bound_m":0.0,"fixture_yaw_bound_deg":0.0,"capsule_perturbations":false},
+    "convex_point_clearance":{"representation":"convex","capture":false,"fixture_position_bound_m":0.0,"fixture_yaw_bound_deg":0.0,"capsule_perturbations":false},
+    "convex_point_capture":{"representation":"convex","capture":true,"fixture_position_bound_m":0.0,"fixture_yaw_bound_deg":0.0,"capsule_perturbations":false},
+    "convex_bounded_capture":{"representation":"convex","capture":true,"fixture_position_bound_m":0.002,"fixture_yaw_bound_deg":3.0,"capsule_perturbations":true}
+  },
+  "capture":{"closing_step_m":0.0005,"maximum_overlap_m":0.0005,"touch_tolerance_m":0.00025,"maximum_normal_angle_deg":50.0},
+  "capsule_position_perturbation_m":0.001,
+  "capsule_axis_perturbation_deg":5.0,
+  "perturbations":"Center, +/-1 mm along each world axis and +/-5 degrees about each world axis (13 poses total). These are finite one-at-a-time sensitivity probes, not full joint uncertainty coverage or calibrated confidence.",
+  "selection":"First ranked joint-limited IK-feasible action among at most three admissible actions per mode; save all decisions before physics. Execute each selected action once from the same checkpoint. No outcome-based retries/selection. Run the recorded target under both the original assay and the common v7 trajectory as labeled controls.",
+  "physics":"Reuse the frozen v7 physical primitive unchanged, including original mass, friction, collision model, actuator settings and retention metric. Target truth only initializes/evaluates actions.",
+  "limitations":"MuJoCo collision meshes are convex hulls, not arbitrary concave triangle meshes. Static pad interception does not establish force closure, dynamic grasp success or safe ongoing use of stale vision. No live integration or repositioning policy in this milestone."
+}

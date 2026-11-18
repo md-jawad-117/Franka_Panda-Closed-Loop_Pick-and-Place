@@ -1,0 +1,13 @@
+{
+  "version":"bounded_blind_centering_v22",
+  "parent_control_protocol":"config/reobserving_control_protocol_v21.json",
+  "runtime_additions":{"blind_budget_s":8.0,"observation_timeout_s":1.0},
+  "methods":["reobserving_v21","blind_v22"],
+  "development":{"seeds":[600,603,605],"conditions":["nominal","release_phase"]},
+  "fresh_smoke":{"seeds":[800,801],"conditions":["nominal","late","phase","release_phase"]},
+  "evidence":"training/results/visibility-assay-v22/summary.json: no tested hand pose keeps the capsule detectable through the final ~4 cm of lowering in seeds 600/603/605 (both finger-equivalent yaws, planned and mirrored sides); the closed pusher fragments the wrist capsule mask from the inspection view that detects it 4/4 with the gripper open (0.2-1.7 mm). The v20/v21 capsule-age<=0.5 s gate through lower/push is therefore unsatisfiable with these cameras.",
+  "correction":"Explicit gate change: during lower/push, missing capsule or fixture evidence is tolerated only within blind_budget_s of the latest fresh synchronized learned pair (plan, revalidation, or in-stroke). Fresh contradicting evidence (fixture moved or motion pending, capsule displaced before contact, capsule off corridor) still stops the stroke. The v21 safe-waypoint observation is kept but shortened to 1.0 s and no longer blocks lowering when it times out within budget.",
+  "controls":"Same optics, neural checkpoints, geometry workers, centering planner and CAD pusher path above the rim, stroke bound, motion timeouts, strict placement evaluator, physics and 30 s budget. Completion is only declared by the unchanged settled inspection. No actual-state inputs.",
+  "freeze":"Frozen before v22 full episodes; budget chosen from v21 phase timing (plan to end of bounded stroke), not tuned on outcomes. Every result retained; fresh seeds 800/801 untouched during development.",
+  "scope":"Development revision on three known scenes; it relaxes one freshness gate and is not a safety guarantee, novelty claim or final benchmark."
+}

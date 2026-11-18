@@ -1,0 +1,22 @@
+# Python environments and caches
+.venv/
+venv/
+training/.venv-cpu/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+
+# Generated outputs
+/results/
+/videos/
+/datasets/
+*.log
+training/.runtime-cache/
+training/local_checks/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

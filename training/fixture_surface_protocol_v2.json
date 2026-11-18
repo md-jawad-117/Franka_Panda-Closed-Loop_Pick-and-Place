@@ -1,0 +1,16 @@
+{
+  "protocol_id": "fixture_surface_v2",
+  "settings": {
+    "version": "observed_fixture_surface_v2",
+    "seed_erosions": 2,
+    "min_seed_points": 12,
+    "seed_height_band_m": 0.003,
+    "below_floor_tolerance_m": 0.0015,
+    "above_rim_tolerance_m": 0.002
+  },
+  "implementation_sha256": "ea205fd6caec8a321b1129d01568139393bc6d0aa97d48e0fddff554ae36afe2",
+  "base_protocol_sha256": "1eab7e8aa9210218a5eb4ded3f5a92b8c036f10c9d31b444d6eb436acde53d71",
+  "inputs": "predicted mask, observed noisy depth/validity, calibrated camera transform, fixed nominal wall height",
+  "scope": "fixture only; capsule estimator, networks, view routing, confirmation and reactive controller unchanged",
+  "uncertainty": "heuristic observed-surface filtering, not calibrated or certified pose bounds"
+}

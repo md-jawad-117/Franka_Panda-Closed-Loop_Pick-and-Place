@@ -1,0 +1,289 @@
+sim:
+  scene_file: assets/scene.xml
+  panda_file: third_party/mujoco_menagerie/franka_emika_panda/panda.xml
+  timestep: 0.002
+  physics_hz: 500
+  control_hz: 50
+  perception_hz: 50
+  gravity_compensation: true
+  home_qpos:
+  - 0.0
+  - -0.13
+  - 0.0
+  - -2.52
+  - 0.0
+  - 2.39
+  - 0.785
+  ee_site_offset: 0.105
+  wrist_cam:
+    pos:
+    - 0.05
+    - 0.0
+    - 0.075
+    tilt_deg: 28.0
+    fovy: 60.0
+  cameras:
+    front_cam:
+      pos:
+      - 0.95
+      - -0.62
+      - 1.0
+      lookat:
+      - 0.45
+      - 0.04
+      - 0.43
+      fovy: 38.0
+    top_cam:
+      pos:
+      - 1.05
+      - 0.05
+      - 1.05
+      lookat:
+      - 0.47
+      - 0.05
+      - 0.4
+      fovy: 40.0
+scene:
+  table_top_z: 0.4
+  capsule:
+    radius: 0.008
+    half_length: 0.015
+    mass: 0.005
+    friction:
+    - 1.2
+    - 0.01
+    - 0.001
+    contact_dim: 6
+  slot:
+    cavity:
+    - 0.06
+    - 0.035
+    wall_height: 0.01
+    wall_thickness: 0.003
+    bottom_thickness: 0.003
+scene_randomization:
+  capsule:
+    x:
+    - 0.4
+    - 0.55
+    y:
+    - -0.2
+    - 0.0
+    yaw_deg:
+    - -60
+    - 60
+  slot:
+    x:
+    - 0.4
+    - 0.55
+    y:
+    - 0.08
+    - 0.25
+    yaw_deg:
+    - -45
+    - 45
+  workspace_bounds:
+    x:
+    - 0.35
+    - 0.62
+    y:
+    - 0.02
+    - 0.3
+  settle_time_s: 0.3
+control:
+  mode: ik_position
+  Kp_pos: 4.0
+  Kp_rot: 3.0
+  max_lin_vel: 0.25
+  max_ang_vel: 1.5
+  lambda: 0.05
+  k_null: 0.5
+  max_target_lead_rad: 0.15
+  home_joint_speed: 1.0
+  home_tol_rad: 0.02
+gripper:
+  open_ctrl: 255
+  closed_ctrl: 0
+  min_grasp_width: 0.006
+  max_grasp_width: 0.03
+  grasp_dist_tol: 0.02
+perception:
+  mode: learned
+  noise:
+    enabled: true
+    pos_std_m: 0.001
+    yaw_std_deg: 1.0
+    dropout_prob: 0.0
+  filter_alpha: 0.5
+  jump_threshold_m: 0.01
+  jump_threshold_deg: 10.0
+  lost_frames_for_search: 10
+  search_height: 0.15
+  learned:
+    worker_python: training/.venv-cpu/Scripts/python.exe
+    worker_threads: 2
+    worker_timeout_s: 30
+    candidate: training/candidate_specialists_v3.json
+    candidate_sha256: e1adce234697c46938db62296a370bb6bf61a82dedc17fdb248e911c0858d1f0
+    protocol: training/pose_protocol_v1.json
+    protocol_sha256: 1eab7e8aa9210218a5eb4ded3f5a92b8c036f10c9d31b444d6eb436acde53d71
+    capture_hz: 5.0
+    max_age_s: 0.25
+    grasp_commit_max_age_s: 0.6
+    grasp_commit_clearance_m: 0.035
+    grasp_commit_xy_m: 0.006
+    place_commit_max_age_s: 0.8
+    place_commit_clearance_m: 0.04
+    place_commit_xy_m: 0.006
+    allow_wrist_frame_confirmation: true
+    confirmation_samples: 2
+    confirmation_position_m: 0.008
+    confirmation_axis_deg: 8.0
+    depth_noise:
+      sigma_m: 0.001
+      dropout: 0.01
+      max_range_m: 2.5
+    worker_script: training/surface_pose_worker.py
+    fixture_protocol: training/fixture_surface_protocol_v2.json
+    fixture_protocol_sha256: c6107f38ea79fe4eb5b7a1074fcde50863dba907d6774e1c433af503c71e0246
+  camera:
+    width: 320
+    height: 240
+    fallback_camera: top_cam
+    hsv_red:
+    - - 0
+      - 120
+      - 70
+    - - 10
+      - 255
+      - 255
+    - - 170
+      - 120
+      - 70
+    - - 180
+      - 255
+      - 255
+    hsv_green:
+    - - 40
+      - 80
+      - 40
+    - - 85
+      - 255
+      - 255
+    min_pixels: 15
+    min_height_above_table: 0.0015
+    size_tolerance_m: 0.004
+    size_tolerance_px: 4
+task:
+  mode: closed_loop
+  pre_grasp_height: 0.08
+  grasp_height_offset: 0.002
+  carry_height: 0.15
+  pre_place_height: 0.08
+  place_height_offset: 0.021
+  retreat_height: 0.1
+  approach_tol_m: 0.004
+  rot_tol_deg: 4.0
+  descend_tol_m: 0.003
+  realign_threshold_m: 0.012
+  drop_threshold_m: 0.04
+  lift_check_height: 0.03
+  grasp_settle_time_s: 0.4
+  release_settle_time_s: 0.4
+  episode_timeout_s: 30.0
+  slot_still_window_s: 0.2
+  slot_still_m: 0.006
+  release_confirm_s: 0.2
+  in_hand_correction: true
+  in_hand_correction_with_learned: true
+  in_hand_alpha: 0.2
+  in_hand_correction_with_camera: false
+  success_max_speed: 0.02
+  success_max_angular_speed: 0.5
+  success_stable_window_s: 0.4
+  success_support_tolerance_m: 0.001
+  success_min_open_width_m: 0.035
+  success_max_drift_m: 0.001
+  success_max_axis_drift_deg: 2.0
+  auto_reset_s: 2.0
+perturbations:
+  schedule_mode: time
+  push_force_N: 30.0
+  push_duration_s: 0.2
+  slot_shift_m: 0.05
+  slot_yaw_change_deg: 25.0
+  slot_move_duration_s: 0.5
+  nudge_force_N: 0.025
+  nudge_duration_s: 0.08
+  nudge_min_clearance_m: 0.035
+  nudge_bounds_y:
+  - -0.3
+  - 0.02
+  push_links:
+  - link3
+  - link4
+  - link5
+  - link6
+  - link7
+  scheduled:
+    arm_push:
+      time_s_range:
+      - 1.8
+      - 2.2
+      states:
+      - APPROACH_OBJECT
+      - TRANSPORT
+      force_N_range:
+      - 10
+      - 40
+      duration_s: 0.2
+    slot_move:
+      time_s_range:
+      - 4.0
+      - 4.6
+      states:
+      - TRANSPORT
+      - DESCEND_SLOT
+      shift_m_range:
+      - 0.02
+      - 0.08
+      yaw_change_deg_range:
+      - -30
+      - 30
+      move_duration_s: 0.5
+    object_nudge:
+      time_s_range:
+      - 0.8
+      - 1.2
+      states:
+      - APPROACH_OBJECT
+      - DESCEND_OBJECT
+      force_N_range:
+      - 0.02
+      - 0.03
+      duration_s: 0.08
+      trigger_delay_by_state:
+        DESCEND_OBJECT:
+        - 0.0
+        - 0.08
+    trigger_delay_s:
+    - 0.1
+    - 0.6
+  marker_duration_s: 1.0
+viewer:
+  auto_reset: false
+  sync_hz: 60
+  status_hz: 5
+  trail_seconds: 2.0
+  show_targets: true
+recording:
+  width: 1280
+  height: 720
+  fps: 30
+  camera: front_cam
+  pip_camera: wrist_cam
+  pip_scale: 0.3
+  out_dir: training/results/learned-integration/videos
+eval:
+  episodes: 100
+  out_dir: training/results/learned-integration

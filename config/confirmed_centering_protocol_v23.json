@@ -1,0 +1,13 @@
+{
+  "version":"confirmed_blind_centering_v23",
+  "parent_control_protocol":"config/blind_centering_protocol_v22.json",
+  "runtime_additions":{"alarm_samples":2,"alarm_consistency_m":0.006},
+  "methods":["blind_v22","confirmed_v23"],
+  "development":{"seeds":[600,603,605],"conditions":["nominal","release_phase"]},
+  "fresh_smoke":{"seeds":[800,801],"conditions":["nominal","late","phase","release_phase"]},
+  "evidence":"training/results/blind-v22/development: seed 605 both strokes stopped by single fresh capsule detections 6-7 mm wrong while evaluation truth was constant to 0.1 mm; seed 600 first stroke stopped on a single 19.6 mm-wrong push-corridor detection while the capsule had moved ~3 mm.",
+  "correction":"The pre-contact displacement and push-corridor capsule guards trip only after 2 distinct fresh violating detections agreeing within 6 mm (5 Hz capture: <=3 mm genuine push motion between samples plus detection noise). A fresh non-violating detection clears the alarm. Worst-case extra travel before a confirmed stop is one capture interval (0.2 s, 3 mm at 15 mm/s).",
+  "controls":"Unchanged v22 fixture guards, blind budget, optics, neural checkpoints, geometry workers, planner, CAD pusher path above the rim, stroke bound, timeouts, strict evaluator, physics, 30 s budget, settled-inspection completion. No actual-state inputs.",
+  "freeze":"Frozen before v23 full episodes; thresholds set from capture rate and push speed, not tuned on outcomes. Every result retained; fresh seeds 800/801 untouched.",
+  "scope":"Development revision on three known scenes; not a safety guarantee, novelty claim or final benchmark."
+}

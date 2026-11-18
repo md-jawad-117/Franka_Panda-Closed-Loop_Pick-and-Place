@@ -1,0 +1,13 @@
+{
+  "version": "visual_checkpoint_preshape_assay_v6",
+  "purpose": "Follow-up mechanical feasibility assay after the open-jaw v5 grid; not a fresh controller-performance cohort.",
+  "cases": ["nominal__v4__505", "phase__v4__500", "release_phase__v4__503"],
+  "approach_joint_widths_m": [0.014, 0.018, 0.024, 0.040, 0.080],
+  "center_height_offsets_m": [0.002, 0.006, 0.010],
+  "axial_offsets_m": [-0.008, 0.0, 0.008],
+  "gripper_calibration": {"full_open_joint_width_m": 0.08, "full_open_ctrl": 255.0, "closed_ctrl": 0.0},
+  "action": "At the safe preposition, command the declared partially open gripper; keep this command through descent; then close, lift, translate above the observed fixture and hold as in the frozen v5 assay.",
+  "entry_count_per_checkpoint": 46,
+  "boundary": "Same recorded visual target interface, original collision geometry/friction/mass/IK, same restored physical checkpoint. No target poses rewritten after initialization. Use v5 timing and physical retention criteria unchanged.",
+  "limits": "Joint-width targets are actuator calibration priors, not measured contact clearance. Test all entries, retain collision/failure outcomes, and do not select future validation scenes by these outcomes. A retained lift is not completed placement or online learned-policy recovery."
+}

@@ -1,0 +1,36 @@
+{
+  "protocol_id": "nominal_geometry_pose_v1",
+  "development_split": "validation",
+  "nominal_dimensions_m": {
+    "capsule_radius": 0.008,
+    "capsule_half_segment": 0.0145,
+    "fixture_cavity": [0.064, 0.036],
+    "fixture_wall_thickness": 0.003,
+    "fixture_wall_height": 0.010,
+    "fixture_bottom_thickness": 0.003
+  },
+  "geometry_scope": "Fixed nominal dimensions, chosen from the declared generation ranges. Per-scene sizes, poses, table height and state are not estimator inputs. Fixture is assumed horizontal; capsule axis is estimated in 3D.",
+  "min_component_pixels": 16,
+  "min_component_fraction": 0.6,
+  "min_depth_points": 12,
+  "max_fit_points": 600,
+  "max_depth_m": 2.5,
+  "capsule_min_pca_ratio": 2.0,
+  "capsule_min_axial_span_fraction": 0.65,
+  "capsule_max_axial_span_fraction": 1.35,
+  "capsule_max_end_on_cosine": 0.9,
+  "capsule_fit_median_limit_m": 0.0025,
+  "capsule_fit_p90_limit_m": 0.005,
+  "capsule_min_scaled_jacobian_ratio": 0.005,
+  "fixture_extent_tolerance_m": 0.012,
+  "fixture_min_extent_fraction": 0.75,
+  "fixture_height_spread_limit_m": 0.025,
+  "error_yardsticks": [
+    {"position_mm": 2, "axis_deg": 5},
+    {"position_mm": 5, "axis_deg": 10},
+    {"position_mm": 10, "axis_deg": 15}
+  ],
+  "fusion": "For each synchronized sample and target, prefer accepted wrist estimate, otherwise accepted top estimate; no truth-based selection or averaging.",
+  "uncertainty_scope": "Deterministic quality gates, not calibrated probabilities or certified bounds. Report missed estimates and accepted bad estimates.",
+  "selection_policy": "Freeze before validation pose results. Any later threshold or algorithm revision must receive a new protocol id and be reported as development tuning. Reserved test predictions are prohibited in this entry point."
+}

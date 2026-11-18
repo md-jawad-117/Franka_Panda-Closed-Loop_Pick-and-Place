@@ -1,0 +1,43 @@
+{
+  "version": "visual_reacquisition_v4",
+  "purpose": "Fresh-scene development comparison; not a final reserved test",
+  "seeds": [
+    500,
+    501,
+    502,
+    503,
+    504,
+    505
+  ],
+  "methods": {
+    "nominal": [
+      "v3",
+      "v4"
+    ],
+    "late": [
+      "v3",
+      "quality_only",
+      "v4"
+    ],
+    "phase": [
+      "v3",
+      "v4"
+    ],
+    "release_phase": [
+      "v3",
+      "v4"
+    ]
+  },
+  "conditions": {
+    "nominal": null,
+    "late": "30 mm at 5.5 s over 0.5 s",
+    "phase": "30 mm during DESCEND_SLOT at <=40 mm clearance",
+    "release_phase": "30 mm triggered 0.1 s into RELEASE, after the first opening command; 0.5 s duration"
+  },
+  "yaw_change_deg": [
+    -15,
+    15
+  ],
+  "timeout_s": 30,
+  "interpretation": "Quality-only isolates the frozen-network observation filtering/routing. v4 adds calibrated view search, bounded recentering of persistent ambiguous placements, and rim-aware retry grasps. The physical push failed development tests and is disabled. Component attribution requires further ablations. Release-phase exposure is checked against actual opening timestamps."
+}

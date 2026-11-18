@@ -1,0 +1,12 @@
+{
+  "version":"tilted_supported_antipodal_assay_v18",
+  "source_cases":[["nominal",600],["release_phase",603],["release_phase",605]],
+  "roll_deg":[0,-30,30,-45,45],"joint_widths_m":[0.014,0.018,0.024,0.040],"center_approach_offsets_m":[0.002,0.006,0.010],"axial_offsets_m":[-0.008,0.0,0.008],
+  "candidate_count":180,"maximum_ik_candidates":3,"minimum_clearance_m":0.0005,
+  "capsule_half_segment_m":0.015,"capsule_position_perturbation_m":0.001,"capsule_axis_perturbation_deg":5.0,
+  "maximum_normal_sum_norm":0.35,"maximum_contact_tcp_z_m":0.004,
+  "hypothesis":"Static bilateral interception alone accepts two contacts both pushing down from rounded pad tips. Require approximately opposing analytic capsule normals and contacts away from the lower rounded pad edge; include larger rolls that can change wall clearance without pushing through walls.",
+  "selection":"Rank by offsets from 2mm approach, zero axial shift/roll and24mm opening. Separate convex CAD world uses only learned targets and fixed dimensions. Check centre plus six +/-1mm position and six +/-5degree axis sensitivity probes before sampled environment path clearance. Save first three ranked endpoint-IK checks and their chosen action list before any physics. The first feasible action is the primary selection; other saved actions are diagnostic probes, never replacements for a failed primary.",
+  "physics":"Unchanged v7 free-capsule lift/transfer/hold dynamics and strict retention/contact scoring. Fixture held at checkpoint; no external force, attachment, teleport after restore, or new controller gains/friction. These rolls are not live-integrated.",
+  "scope":"Three selected development states and a finite candidate family, not independent trials, certified force closure, complete placement, online freshness, calibrated uncertainty or novelty. Preserve abstentions and every physical failure."
+}

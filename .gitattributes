@@ -1,0 +1,4 @@
+# Store and check out every file byte-for-byte. The perception worker verifies
+# SHA-256 hashes of its source files and model checkpoints before loading, so
+# line-ending conversion (core.autocrlf) would make it refuse to start.
+* -text

@@ -1,0 +1,14 @@
+{
+  "version":"observed_support_geometry_control_v17",
+  "parent_control_protocol":"config/inspection_protocol_v14.json",
+  "geometry_protocol":"training/support_plane_protocol_v17.json",
+  "methods":["wide_full_v14","support_v17","support_top_v17"],
+  "worker_scripts":{"support_v17":"training/support_pose_worker_v17.py","support_top_v17":"training/support_top_worker_v17.py"},
+  "development":{"seeds":[600,603,605],"conditions":["nominal","release_phase"]},
+  "fresh_smoke":{"seeds":[800,801],"conditions":["nominal","late","phase","release_phase"]},
+  "hypothesis":"A horizontal support surface measured from the top RGB-D background plus known bottom thickness can disambiguate a fixture floor or rim even when only one surface is visible. Prefer-top variant tests whether a global camera gives more stable destination geometry.",
+  "boundary":"Only predicted masks, noisy depth, calibrated camera transforms and declared CAD dimensions. No true table height, segmentation labels, scene recipe, object poses or physics contacts enter geometry or control. All three methods keep the same optics, frozen neural checkpoints, controller, 30s budget and strict physical success evaluator.",
+  "fallback":"If no observed horizontal support has sufficient spatial extent, retain the original fully gated surface estimator. A present but incompatible support observation rejects the target. No oracle or default-coordinate fallback. View-priority veto is logged separately from raw candidate geometry.",
+  "freeze":"Freeze estimator, protocol, view policy, source/model hashes and all methods before any new full episode. Use known development scenes first and keep all failures. Unused fresh scenes remain deferred until a development candidate is selected.",
+  "scope":"Development geometry/control experiment informed by selected-view diagnosis. No new model training, no reserved perception-test use, no established novelty or final generalization claim."
+}

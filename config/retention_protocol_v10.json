@@ -1,0 +1,26 @@
+{
+  "version": "retention_feedback_v10_development",
+  "settings": {
+    "probe_height_m": 0.025,
+    "minimum_visual_rise_m": 0.015,
+    "arrival_m": 0.004,
+    "relative_drift_m": 0.006,
+    "maximum_tcp_distance_m": 0.04,
+    "confirmation_samples": 2,
+    "preclose_reference_max_age_s": 1.2,
+    "width_debounce_s": 0.08,
+    "probe_timeout_s": 3.0,
+    "carry_visual_max_age_s": 0.6,
+    "carry_observe_timeout_s": 2.4,
+    "view_dwell_s": 0.6,
+    "view_yaw_offsets_deg": [0,20,-20],
+    "maximum_retries": 2,
+    "retract_timeout_s": 3.0
+  },
+  "development": {"seeds": [600,603,605], "conditions": ["nominal","release_phase"], "methods": ["v4","retention_v10"]},
+  "fresh_smoke": {"seeds": [700,701], "conditions": ["nominal","release_phase"], "methods": ["v4","retention_v10"]},
+  "primary": "Complete physical placement success for every planned full episode. Grasp detections, test lifts, abstentions and retries are separate diagnostics and never successes.",
+  "freeze": "Register source/settings before any v10 full episode. No tuning within a cohort. Retain failures and all technical attempts. Fresh smoke runs after development, with no parameter changes. Fresh scenes are two seeds crossed with two conditions, not four independent scenes or a final test.",
+  "boundary": "Only detached Obs learned capsule positions/timestamps and measured EE pose, joint positions and finger width enter RetentionFSM. No contact/force, actual object pose, evaluator feedback or simulator reference. Existing camera models, geometry, actuator/friction settings, original grasp geometry and placement/reacquisition logic unchanged.",
+  "scope": "Opt-in control development. No v8 planner integration, no deeper grasp claim, no novelty or real-time guarantee. The fixture perturbation remains active throughout complete episodes. Visibility timeout holds closed and aborts; empty-hand/detached evidence can retract and invoke bounded visual reacquisition. Unknown visibility never counts as retained."
+}

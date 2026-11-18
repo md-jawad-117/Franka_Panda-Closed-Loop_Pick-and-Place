@@ -1,0 +1,19 @@
+{
+  "candidate":"obb_point_pose_sensitive_capture",
+  "status":"Selected for independent development-scene validation; not integrated into any live controller",
+  "selection_protocol":"config/grasp_capture_ablation_v8.json",
+  "selection_mode":"obb_point_pose_sensitive_capture",
+  "source_freezes":["c079c13","4795511"],
+  "selection_evidence":"docs/GRASP_CAPTURE_V8.md",
+  "development_states":["nominal__v4__505","phase__v4__500","release_phase__v4__503"],
+  "reason":"Preserves the known feasible retained lift while rejecting the fragile missed-lift action in selected-state development. Convex-query variants admitted a lower grasp with real fixture contact.",
+  "abstention":"No admitted grasp produces no physical pickup. Online reacquisition/repositioning is not implemented by this candidate.",
+  "validation_requirements":[
+    "Freeze independently seeded complete scenes and criteria before seeing outcomes",
+    "Preserve scenes with missing observations, no recovery closure or no feasible action instead of selecting only convenient checkpoints",
+    "Use matched perception, geometry and physical trajectories for component controls",
+    "Distinguish contact-free retention, retention with contact, missed grasp, abstention and full placement",
+    "Validate online freshness, tracking and full-trajectory retention before live integration"
+  ],
+  "limits":"Static finite pose probes and conservative CAD geometry are uncalibrated. No held-out success rate, complete recovery, safe real-time control or novelty claim is established."
+}

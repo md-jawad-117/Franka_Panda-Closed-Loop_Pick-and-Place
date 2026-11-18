@@ -1,0 +1,20 @@
+{
+  "version": "selected_checkpoint_grasp_feasibility_v5",
+  "scope": "Controlled physical grasp/retention assay from selected development checkpoints; NOT a learned-controller comparison or final placement result.",
+  "cases": ["nominal__v4__505", "phase__v4__500", "release_phase__v4__503"],
+  "checkpoint_rule": "First DESCEND_OBJECT control tick in the last descent segment before the first actual retry closure; initial closure for nominal positive control.",
+  "candidates": {"include_recorded_grasp_target": true, "center_height_offsets_m": [0.002, 0.006, 0.010, 0.012], "axial_offsets_m": [-0.008, 0.0, 0.008]},
+  "approach_height_m": 0.08,
+  "lift_above_grasp_m": 0.10,
+  "position_tolerance_m": 0.003,
+  "rotation_tolerance_deg": 4.0,
+  "phase_deadlines_s": {"preposition": 1.5, "descend": 2.0, "close": 0.42, "lift": 2.0, "transport": 2.0, "hold": 0.6},
+  "maximum_finger_fixture_penetration_m": 0.002,
+  "minimum_capsule_rise_m": 0.05,
+  "retention_window_s": 0.4,
+  "maximum_capsule_tcp_distance_m": 0.04,
+  "require_bilateral_finger_contact": true,
+  "planning_inputs": "Recorded learned capsule center/axis, recorded gripper target quaternion, and recorded learned fixture center. No true target pose/contact/axis may select the action.",
+  "initialization": "Restore complete physical checkpoint once before each counterfactual trial. Object and fixture poses are never rewritten during the action. Keep original masses, friction, collision geometry, actuator limits and IK.",
+  "evaluation": "Log true rise, contact, clearance, tracking and retention separately. A collision-free retained lift is an assay outcome, never paper-level placement success. Frozen observations intentionally isolate mechanics and do not validate perception continuity or safe stale-observation control."
+}

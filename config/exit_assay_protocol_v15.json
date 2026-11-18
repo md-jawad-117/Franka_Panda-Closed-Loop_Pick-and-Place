@@ -1,0 +1,11 @@
+{
+  "version":"physical_fixture_exit_v15_development",
+  "source_cases":[["release_phase",603],["release_phase",605]],
+  "settings":{"maximum_age_s":0.25,"wall_thickness_m":0.003,"capsule_half_segment_m":0.015,"capsule_radius_m":0.008,"pickup_clearance_m":0.012,"near_fixture_slack_m":0.012,"minimum_stroke_m":0.006,"maximum_stroke_m":0.08,"approach_distance_m":0.035,"workspace_margin_m":0.005,"surface_overlap_m":0.004,"safe_height_m":0.55,"tool_forward_extent_m":0.0085,"approach_clearance_m":0.005},
+  "methods":["original_radial_push","cad_exit_face_push"],
+  "selection":"Four nominal fixture faces, shortest workspace-feasible stroke that puts the entire capsule plus pickup clearance beyond a fixture face. Plan from learned pose/axis and fixed CAD only. Save both methods before physics. No selection by physical outcomes.",
+  "physics":"Restore each original physical checkpoint once per method; fixture held there. Use the original RimExtraction joint/Cartesian actuator-driven primitive at its original speed, deadlines and collision physics. No body teleport, qpos updates after restoration, external object force, or changed mass/friction/geometry.",
+  "primary":"Whole capsule beyond fixture outer footprint by12mm, lying on table with <=1mm floor gap, low linear/angular speed and <=12degree tilt throughout final0.4s. Also require zero hand/finger fixture and finger-table contact. This is extraction readiness, never completed placement.",
+  "limits":{"maximum_environment_penetration_m":0.002,"settle_s":0.6,"retention_window_s":0.4,"maximum_speed_m_s":0.02,"maximum_angular_speed_rad_s":0.5},
+  "scope":"Two selected already-failed states and two fixed policies, not independent test trials. Preserve abstentions, collisions and failed pushes; no online vision/placement/recovery success claim. This assay determines whether physical repositioning is worth integrating."
+}

@@ -1,0 +1,22 @@
+{
+  "version":"fresh_controller_scene_grasp_validation_v9",
+  "seeds":[600,601,602,603,604,605],
+  "conditions":["nominal","late","phase","release_phase"],
+  "expected_episodes":24,
+  "exact_uninstrumented_replay_checks":[{"condition":"nominal","seed":600},{"condition":"release_phase","seed":600}],
+  "independence":"Six new initial-scene seeds reused in four matched disturbance conditions. These are not 24 independent initial scenes, a final test set or novel assets.",
+  "baseline":"Unmodified frozen v4 learned controller and original benchmark configuration(condition). Generate every complete episode before counterfactual grasp evaluation; keep all successes, failures, missing observations and absent recovery opportunities.",
+  "checkpoint":"First control frame whose state_before is DESCEND_OBJECT. Nominal: initial descent. Other conditions: placement_retries > 0. Select prospectively, before knowing whether this segment ever closes or lifts; never replace an unfavorable first opportunity by a later one.",
+  "missing_checkpoint":"Retain full episode. Report no recovery/initial-descent opportunity explicitly in every case denominator. Never count it as candidate success or silently drop it.",
+  "unusable_checkpoint":"If the first opportunity leaves DESCEND_OBJECT, lacks a target/reference, has no finite capsule axis, or fails the frozen observation/freshness gate, retain it as unassessable/abstaining. Do not choose a later checkpoint.",
+  "methods":["obb_point_clearance","obb_point_capture","obb_point_pose_sensitive_capture"],
+  "candidate":"config/grasp_candidate_v8.json",
+  "method_protocols":["config/grasp_capture_protocol_v8.json","config/grasp_capture_ablation_v8.json"],
+  "parameters":"Use frozen v8 candidate/ranking, OBB clearance threshold, capture probes, waypoint IK and v7 physical primitive unchanged. No tuning on these outcomes.",
+  "controls":"Save all three choices before physics. Run the same common trajectory for every selected method action and the recorded visual target. Retention/contact criteria remain frozen. Preserve failures and abstentions; no outcome-driven retries.",
+  "environment_scope":"Each counterfactual restores the physical checkpoint and holds the fixture stage at that pose, as in prior mechanical assays. It does not continue the episode's remaining perturbation trajectory or visual observations.",
+  "scores":["no_opportunity","unassessable","abstain","failed_lift","retained_with_environment_contact","contact_free_retained_lift"],
+  "primary_reporting":"Per condition: all six planned cases, number with prospective checkpoint, observation validity, method coverage/abstentions and each physical outcome. Baseline full-placement success is separate context, never candidate placement success.",
+  "limitations":"Fresh controller-development scene validation of an offline grasp primitive. No end-to-end candidate placement result, online latency/freshness guarantee, final held-out perception-test evaluation or novelty claim.",
+  "technical_interrupts":"Keep incomplete attempts. Resume only technically incomplete cases with the same seed, sources and protocol; never repeat a completed case because its outcome is poor. Count technical failures and attempts in the audit."
+}

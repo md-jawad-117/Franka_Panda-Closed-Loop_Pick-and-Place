@@ -1,0 +1,47 @@
+{
+  "version": "moving_destination_v1",
+  "purpose": "development comparison; unseen control seeds, not reserved perception test scenes",
+  "development_seeds": [
+    0,
+    3
+  ],
+  "comparison_seeds": [
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109
+  ],
+  "controllers": [
+    "open_loop",
+    "reactive_v1",
+    "wait_reactive_v1",
+    "active_observe_v1"
+  ],
+  "fixed_wait_s": 1.0,
+  "conditions": {
+    "nominal": null,
+    "move_4p5": 4.5,
+    "move_5p5": 5.5
+  },
+  "shift_m": 0.03,
+  "yaw_change_deg_range": [
+    -15.0,
+    15.0
+  ],
+  "move_duration_s": 0.5,
+  "timeout_s": 30.0,
+  "matching": "same seed/initial poses/exogenous timed event plan/sensor-noise stream; images depend on robot trajectory",
+  "success": "unchanged full capsule contained, supported, released, slow and stable; DONE within timeout",
+  "limitations": [
+    "finite prior window cannot guarantee no future target motion",
+    "synchronous inference; no physical latency simulation",
+    "fixed wait is a timing ablation, not matched trajectory or identical total delay",
+    "new controller kept opt-in until evaluation; no reserved test inference"
+  ]
+}

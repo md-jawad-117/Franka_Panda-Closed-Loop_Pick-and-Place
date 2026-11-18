@@ -1,0 +1,10 @@
+{
+  "version":"inward_visual_centering_mechanical_v19",
+  "source_cases":[["release_phase",603],["release_phase",605]],
+  "settings":{"maximum_age_s":0.25,"capsule_half_segment_m":0.015,"capsule_radius_m":0.008,"maximum_capsule_tilt_deg":12,"centred_clearance_m":0.002,"near_fixture_slack_m":0.012,"height_tolerance_m":0.006,"minimum_correction_m":0.005,"maximum_correction_m":0.04,"tool_forward_extent_m":0.0085,"approach_clearance_m":0.005,"workspace_margin_m":0.005,"surface_overlap_m":0.004,"safe_clearance_m":0.15},
+  "motion":{"speed_m_s":0.015,"arrival_position_m":0.002,"arrival_rotation_deg":3,"phase_timeout_s":2.5,"push_timeout_s":4.0,"settle_s":0.8,"maximum_environment_penetration_m":0.002},
+  "hypothesis":"A capsule near a cavity wall can be nudged inward without lifting it or crossing the wall. Plan a short pusher stroke above the rim, with tool/shape contact offset, ending at the learned fixture centre. This can avoid the trapped shallow grasp and outward-push transition.",
+  "boundary":"Plans use only original frozen learned checkpoint estimates, robot readings and nominal CAD. Independent truth scores the resulting physics only. No qpos writes after restore, object forces, attachment, changed friction or geometry. No source estimate is relabelled as a new observation.",
+  "primary":"Mechanical centering readiness requires the original evaluator's full capsule containment, support, release, slow motion and stable window, plus zero robot fixture/table contact. Evaluator final_state is ASSAY so overall task success remains false; this is never called complete learned-control placement.",
+  "scope":"Two selected failed states, one predeclared action per state, frozen targets and fixed fixture. Keep failure/abstention/contact outcomes. Online visual stopping, uncertainty handling and post-push verification need separate integration and new full episodes."
+}

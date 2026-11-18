@@ -1,0 +1,13 @@
+{
+  "version":"cad_bounded_wide_wrist_v13",
+  "camera_settings":{"transverse_center_allowance_m":0.006,"axis_deviation_deg":15.0,"center_depth_bounds_m":[0.0,0.012],"border_pixels":6,"round_fovy_step_deg":5,"maximum_fovy_deg":110},
+  "derivation":"Keep the original mount and viewing direction. Construct a static hand-frame box enclosing the nominal capsule under declared grasp-centre and axis deviations. Solve the pinhole inequalities for all corners with six-pixel image border, then round FOV up to the next five degrees. No target state or image/physical outcome enters this design.",
+  "methods":["v4","wide_v13","wide_retention_v13"],
+  "retention_settings_source":"config/retention_protocol_v10r1.json",
+  "development":{"seeds":[600,603,605],"conditions":["nominal","release_phase"]},
+  "fresh_smoke":{"seeds":[800,801],"conditions":["nominal","late","phase","release_phase"]},
+  "primary":"Strict complete physical placement, same 30-second budget for every method; keep actual intervention exposure and early aborts separate.",
+  "freeze":"Register geometry, inherited controller and every method before this cohort. Keep the unsuccessful re-aimed v11 camera cohort. Complete development before deciding whether a method is ready for fresh collection; do not consume fresh cases during tuning.",
+  "boundary":"Only static robot/capsule design dimensions and lens calibration set the FOV. Networks, acceptance gates, noise, mass, friction, actuators, original grasp geometry and placement/recovery policy unchanged. Independent target truth is evaluation-only.",
+  "scope":"Development optical-design correction after v11, not a clean preregistered confirmatory comparison with v11 or a novelty claim. Wider FOV changes pixel resolution; keep pose rejections and accepted errors. No new Kaggle run or reserved perception-test evaluation."
+}

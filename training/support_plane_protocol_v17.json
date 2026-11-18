@@ -1,0 +1,21 @@
+{
+  "version": "observed_support_fixture_geometry_v17",
+  "implementation_sha256": "e6ffa61969ee8f69e8f6e3ddf2d0db63c508dc9215f3607146e15f702dedfacc",
+  "base_protocol_sha256": "1eab7e8aa9210218a5eb4ded3f5a92b8c036f10c9d31b444d6eb436acde53d71",
+  "settings": {
+    "version": "observed_support_fixture_v17",
+    "support_band_m": 0.003,
+    "support_max_points": 5000,
+    "support_min_points": 200,
+    "support_min_fraction": 0.12,
+    "support_min_xy_span_m": 0.12,
+    "support_modes": 3,
+    "surface_tolerance_m": 0.0015,
+    "above_rim_tolerance_m": 0.002,
+    "minimum_surface_fraction": 0.35,
+    "minimum_surface_points": 12,
+    "below_floor_tolerance_m": 0.001
+  },
+  "boundary": "Predicted background/fixture masks, noisy depth and calibrated camera matrices only. Horizontal support prior and nominal bottom thickness; no actual table height, labels or scene state.",
+  "scope": "Development revision, not calibrated confidence. Failed/incompatible observed support remains unavailable."
+}

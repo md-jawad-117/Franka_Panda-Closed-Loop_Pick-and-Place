@@ -1,0 +1,70 @@
+{
+  "candidate_id": "view_specialization_v3_seed17",
+  "frozen_date": "2026-10-15",
+  "experimental_source_commit": "ecb9969",
+  "status": "development_candidate_for_offline_pose_evaluation",
+  "routing": "use known sensor camera identity; no target pose or label routing",
+  "input_contract": [
+    "RGB / 255",
+    "observed optical-z depth clipped to [0, 2.5] metres / 2.5",
+    "depth validity"
+  ],
+  "classes": {
+    "0": "background",
+    "1": "capsule",
+    "2": "fixture"
+  },
+  "dataset_metadata_sha256": "f3825a951bcfa8d12b9fb5d2f4e15d898b0a5a3ad6c190ba09657b36f8759577",
+  "manifest_sha256": "45f890e1fd6c92b70514ff411caa00941e9faa3bf955992f7a4ec93f4b202687",
+  "selection_split": "validation: 18 scenes / 360 total frames; same split used for reported comparison",
+  "reserved_test_evaluated": false,
+  "limitations": [
+    "one training seed",
+    "two models store twice the shared model parameters",
+    "no 3D pose, abstention, runtime or robot success established"
+  ],
+  "models": {
+    "wrist_cam": {
+      "checkpoint_relative_to_research_root": "training/results/kaggle_specialization_v3_seed17/wrist_cam/best.pt",
+      "sha256": "0289a7317ea9de0ac9c76e6e693e6967e5398cbbac25e1b9b748bfe5c9ce2b5a",
+      "selected_epoch": 30,
+      "model_version": "tiny_unet_v1",
+      "base": 16,
+      "input_mode": "rgbd",
+      "input_channels": 5,
+      "parameter_count": 488323,
+      "source_sha256": {
+        "data.py": "be63f2c36c89f9195ce4437fcfe15b46f5ea929d69d1550e8847789dc43d8699",
+        "experiment.py": "a8f21dad1705bc8f2b6c88af12f04a6a033e3e47fb8ae8d920034d2981ce0e63",
+        "metrics.py": "1e8b431ef9974c757559791b9960b7c86d01cb9268a3e9d60011c7afa387c8b2",
+        "model.py": "a426b130e85da4a18a78c79913e2846764f41800d7848456150e1ad72efb41da",
+        "runner.py": "479b908bfab1e487e7c48a9ccd6653481c53fd78c8c564993703704aa8b6f014",
+        "specialization.py": "6ae2ee28994cf251e815ecbd5ea35c89da1d142cf4961de05b139c7a60938359",
+        "objectives.py": "e7791ba16d1ddb2548cc1e764f1e52897e134d390c0d5aeefa69a5ca82574148",
+        "__init__.py": "7b56b71f4419d6cca9cf384669c66a3b49abff8480f126b6e6c2c06427a63eae"
+      },
+      "selection_metric": "view_foreground_iou"
+    },
+    "top_cam": {
+      "checkpoint_relative_to_research_root": "training/results/kaggle_specialization_v3_seed17/top_cam/best.pt",
+      "sha256": "d7b8bd6f28d270103ba3346ae70cf2bcd180572c9c8ced41572b027fc6544590",
+      "selected_epoch": 29,
+      "model_version": "tiny_unet_v1",
+      "base": 16,
+      "input_mode": "rgbd",
+      "input_channels": 5,
+      "parameter_count": 488323,
+      "source_sha256": {
+        "data.py": "be63f2c36c89f9195ce4437fcfe15b46f5ea929d69d1550e8847789dc43d8699",
+        "experiment.py": "a8f21dad1705bc8f2b6c88af12f04a6a033e3e47fb8ae8d920034d2981ce0e63",
+        "metrics.py": "1e8b431ef9974c757559791b9960b7c86d01cb9268a3e9d60011c7afa387c8b2",
+        "model.py": "a426b130e85da4a18a78c79913e2846764f41800d7848456150e1ad72efb41da",
+        "runner.py": "479b908bfab1e487e7c48a9ccd6653481c53fd78c8c564993703704aa8b6f014",
+        "specialization.py": "6ae2ee28994cf251e815ecbd5ea35c89da1d142cf4961de05b139c7a60938359",
+        "objectives.py": "e7791ba16d1ddb2548cc1e764f1e52897e134d390c0d5aeefa69a5ca82574148",
+        "__init__.py": "7b56b71f4419d6cca9cf384669c66a3b49abff8480f126b6e6c2c06427a63eae"
+      },
+      "selection_metric": "view_foreground_iou"
+    }
+  }
+}

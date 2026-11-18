@@ -1,0 +1,14 @@
+{
+  "version":"settled_visual_placement_inspection_v14",
+  "inspection_settings":{"arrival_position_m":0.006,"arrival_rotation_deg":6,"settle_s":0.15,"view_dwell_s":1.6,"unreachable_view_s":2.0,"views":5,"timeout_s":10.0,"confirmation_max_age_s":0.6},
+  "methods":["v4","inspection_v14","wide_inspection_v14","wide_full_v14"],
+  "camera_protocol_source":"config/framing_wide_protocol_v13.json",
+  "retention_settings_source":"config/retention_protocol_v10r1.json",
+  "development":{"seeds":[600,603,605],"conditions":["nominal","release_phase"]},
+  "fresh_smoke":{"seeds":[800,801],"conditions":["nominal","late","phase","release_phase"]},
+  "hypothesis":"Original verification changes observation viewpoints while collecting stability evidence and loses DONE immediately after a missing observation. Freeze each observation pose, collect only after measured robot arrival/settling, and hold the confirmed view under an explicit short evidence-age bound.",
+  "unchanged":"The same learned capsule/fixture containment, height, tilt, minimum sample count, 0.4 s stable window, 3 mm/3 degree stability and synchronized-pair gates apply. Physical success evaluator, robot physics and original grasp/placement motion are unchanged. Ambiguity requests another view rather than automatically regrasping a possibly correct placement.",
+  "boundary":"Only detached learned estimates and robot proprioception. No actual containment, support/contact, evaluator result, object pose or true scene state enters inspection. The independent strict released/supported/stable placement evaluator remains the sole primary success metric.",
+  "freeze":"Freeze before v14 full episodes. Baseline and all variants retain the same 30-second episode limit. Three known development scenes precede fresh scenes; defer unused fresh collection while implementation issues remain. Preserve v11/v13 and mechanical-probe outcomes independently.",
+  "scope":"Engineering temporal-evidence correction and component ablation, not established research novelty. Short bounded confirmation is not a new positive measurement or proof against future changes. Any accepted but physically incorrect DONE remains a recorded failure."
+}

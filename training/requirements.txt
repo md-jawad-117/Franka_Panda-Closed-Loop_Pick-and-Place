@@ -1,0 +1,4 @@
+# Kaggle normally provides these; the notebook records the actual runtime versions.
+torch>=2.6,<3
+numpy>=1.26,<3
+Pillow>=10,<13

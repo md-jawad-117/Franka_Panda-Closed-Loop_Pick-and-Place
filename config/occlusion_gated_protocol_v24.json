@@ -1,0 +1,14 @@
+{
+  "version":"occlusion_gated_centering_v24",
+  "parent_control_protocol":"config/confirmed_centering_protocol_v23.json",
+  "runtime_additions":{"occlusion_clearance_m":0.010,"hand_envelope":"config/hand_envelope_v24.npz","hand_envelope_sha256":"d7f50d506d579dfa626253009d54def904417adc90c515151547ef9ecab3734c",
+    "top_cam_position_m":[1.05,0.05,1.05],"wrist_cam_tcp_frame_m":[0.05,0.0,-0.03]},
+  "methods":["confirmed_v23","occlusion_v24"],
+  "development":{"seeds":[600,603,605],"conditions":["nominal","release_phase"]},
+  "fresh_smoke":{"seeds":[800,801],"conditions":["nominal","late","phase","release_phase"]},
+  "evidence":"training/results/confirmed-v23/development seed 600: two agreeing top-camera detections 19.6 mm wrong at contact height with hand-envelope sight-line clearance 0.2 and 1.4 mm. Offline over 301 recorded v22/v23 top-camera detections, clearance<10 mm gates both, and every ungated detection is within 10 mm of truth (remaining 6-8 mm random outliers are covered by v23 confirmation). Gate decision identical for thresholds 8-15 mm; good stroke wrist detections have clearance 14-15 mm.",
+  "correction":"During lower/push only, a capsule detection whose camera sight line passes within 10 mm of the closed hand/finger CAD envelope (scripts/extract_hand_envelope_v24.py, robot model only) is not fresh evidence. Missing evidence falls under the unchanged v22 blind budget.",
+  "controls":"Unchanged v23 confirmation, fixture guards, blind budget, optics, networks, workers, planner, CAD pusher path, stroke bound, timeouts, strict evaluator, physics, 30 s budget, settled-inspection completion. Inputs: calibration, proprioception, robot CAD, detections. No actual object state.",
+  "freeze":"Frozen before v24 full episodes. The gate threshold was chosen from recorded detection errors on the development scenes (not from task outcomes) and is reported as such. Every result retained; fresh seeds 800/801 untouched.",
+  "scope":"Development revision on three known scenes; not a safety guarantee, novelty claim or final benchmark."
+}

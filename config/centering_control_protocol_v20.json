@@ -1,0 +1,14 @@
+{
+  "version":"closed_loop_visual_centering_v20",
+  "parent_control_protocol":"config/support_control_protocol_v17.json",
+  "centering_plan_protocol":"config/centering_assay_protocol_v19.json",
+  "runtime_settings":{"maximum_attempts":2,"ambiguous_wait_s":0.8,"goal_position_m":0.002,"maximum_overtravel_m":0.006,"fixture_change_m":0.004,"fixture_change_deg":5,"fixture_max_age_s":0.6,"capsule_max_age_s":0.5,"maximum_lateral_error_m":0.006,"maximum_error_growth_m":0.005},
+  "methods":["support_top_v17","centering_v20"],
+  "development":{"seeds":[600,603,605],"conditions":["nominal","release_phase"]},
+  "fresh_smoke":{"seeds":[800,801],"conditions":["nominal","late","phase","release_phase"]},
+  "trigger":"Stable outside inspection can request a short inward correction. Three stable synchronized ambiguous-clearance captures can request recentering only when height/tilt are plausible, the capsule can fit at the centre, the visual centre error exceeds5mm and observed-support fixture evidence is available. The uncertainty is not relabelled as a proven miss.",
+  "feedback":"Plan from learned poses/axis and CAD. Move ordinary robot actuators above the rim; during the push stop on the learned centre/clearance goal, fixture motion, missing observations or capsule deviation. Stroke/overtravel, deadlines and attempts are bounded. Retract, open and collect fresh settled visual evidence after every motion; trajectory completion never counts as task success.",
+  "controls":"Both methods use the same measured-support/top-view worker, frozen networks, 85degree wrist optics, strict containment/stability thresholds, original30s time budget and untouched physics. No target-body writes, attachments or object forces. Contact/force diagnostics remain evaluation-only.",
+  "freeze":"Register before v20 full episodes. Complete known development first. All unused fresh scenes remain deferred while tuning. Preserve all ablations, failed grasps/pushes and technical attempts.",
+  "scope":"Development integration after two selected mechanical inward-push successes. This is not established novelty, a hardware safety certificate, calibrated uncertainty or final generalization result."
+}

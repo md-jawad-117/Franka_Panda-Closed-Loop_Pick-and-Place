@@ -1,0 +1,13 @@
+{
+  "version": "capsule_raised_surface_fallback_v4",
+  "implementation_sha256": "f297402fb6acff5d16b5286881c2c3d5db064825e5ad7b61e743aedc12c90220",
+  "base_protocol_sha256": "1eab7e8aa9210218a5eb4ded3f5a92b8c036f10c9d31b444d6eb436acde53d71",
+  "fixture_protocol_sha256": "c6107f38ea79fe4eb5b7a1074fcde50863dba907d6774e1c433af503c71e0246",
+  "settings": {
+    "version": "capsule_raised_surface_fallback_v4",
+    "minimum_surface_above_floor_m": 0.0025,
+    "center_floor_slack_m": 0.007,
+    "fallback_only": true
+  },
+  "scope": "Learned capsule-mask depth filtering; horizontal fixture and fixed nominal capsule geometry. No target truth, labels or exact scene dimensions."
+}
